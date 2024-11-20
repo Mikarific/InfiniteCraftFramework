@@ -1,0 +1,51 @@
+{
+	"name": "infinite-craft-framework",
+	"version": "0.1.0",
+	"description": "Framework for hooking into Infinite Craft functions.",
+	"author": "Mikarific",
+	"license": "MIT",
+	"scripts": {
+		"dev": "rollup -wc",
+		"build:types": "tsc",
+		"build:js": "rollup -c",
+		"build": "run-s ci clean build:js",
+		"format": "prettier --ignore-path .eslintignore --write .",
+		"lint": "prettier --ignore-path .eslintignore --check . && eslint --ext .ts,tsx src",
+		"prepublishOnly": "run-s build",
+		"ci": "run-s lint",
+		"clean": "del-cli dist"
+	},
+	"main": "dist/index.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"default": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"types"
+	],
+	"typings": "types/index.d.ts",
+	"devDependencies": {
+		"@gera2ld/plaid": "~2.7.0",
+		"@gera2ld/plaid-rollup": "~2.7.0",
+		"del-cli": "^5.1.0",
+		"eslint-config-prettier": "^9.1.0",
+		"lint-staged": "^15.2.0",
+		"prettier": "^3.1.1"
+	},
+	"dependencies": {
+		"@babel/runtime": "^7.25.9",
+		"infinite-craft-framework": "file:"
+	},
+	"lint-staged": {
+		"src/**": [
+			"eslint --fix",
+			"prettier --write"
+		]
+	},
+	"engines": {
+		"node": ">=20"
+	}
+}

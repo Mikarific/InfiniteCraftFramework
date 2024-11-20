@@ -1,0 +1,10 @@
+node_modules
+*.log
+/.idea
+/dist
+/.nyc_output
+/coverage
+/types
+/docs
+bun.lockb
+package-lock.json
