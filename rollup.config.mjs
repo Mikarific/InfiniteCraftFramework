@@ -17,7 +17,7 @@ export default defineConfig([
 		output: {
 			format: 'esm',
 			indent: false,
-			file: `dist/${pkg.version}/InfiniteCraftFramework.mjs`,
+			file: `dist/InfiniteCraftFramework.mjs`,
 			banner: `/*! InfiniteCraftFramework@${pkg.version} | ${pkg.license} License */`,
 		},
 	},
@@ -33,7 +33,7 @@ export default defineConfig([
 		output: {
 			format: 'iife',
 			indent: false,
-			file: `dist/${pkg.version}/InfiniteCraftFramework.js`,
+			file: `dist/InfiniteCraftFramework.js`,
 			name: 'ICF',
 			banner: `/*! InfiniteCraftFramework@${pkg.version} | ${pkg.license} License */\nvar s,i,t;i=null==(s=this.ICF||{})?void 0:s.version,t="${pkg.version}",(void 0===i||i.startsWith(t+"-")||!t.startsWith(i+"-")&&-1===i.localeCompare(t,void 0,{numeric:!0,sensitivity:"case",caseFirst:"upper"}))&&`,
 			extend: true,
