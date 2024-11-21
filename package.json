@@ -10,7 +10,7 @@
 		"build:js": "rollup -c",
 		"build": "run-s ci clean build:js",
 		"format": "prettier --ignore-path .eslintignore --write .",
-		"lint": "prettier --ignore-path .eslintignore --check . && eslint --ext .ts,tsx src",
+		"lint": "prettier --ignore-path .eslintignore --check --write . && eslint src/*.ts",
 		"prepublishOnly": "run-s build",
 		"ci": "run-s lint",
 		"clean": "del-cli dist"
@@ -28,12 +28,20 @@
 	],
 	"typings": "types/index.d.ts",
 	"devDependencies": {
+		"@eslint/eslintrc": "^3.2.0",
+		"@eslint/js": "^9.15.0",
 		"@gera2ld/plaid": "~2.7.0",
 		"@gera2ld/plaid-rollup": "~2.7.0",
-		"del-cli": "^5.1.0",
+		"@typescript-eslint/eslint-plugin": "^8.15.0",
+		"@typescript-eslint/parser": "^8.15.0",
+		"del-cli": "^6.0.0",
+		"eslint": "^9.15.0",
 		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"globals": "^15.12.0",
 		"lint-staged": "^15.2.0",
-		"prettier": "^3.1.1"
+		"prettier": "^3.3.3",
+		"typescript": "^5.6.3"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.25.9",
