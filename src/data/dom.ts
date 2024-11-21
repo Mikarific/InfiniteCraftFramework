@@ -1,4 +1,4 @@
-function domPromise(func: () => any): Promise<any> {
+function domPromise<T>(func: () => T): Promise<T> {
 	return new Promise((resolve) => {
 		if (window.location.hostname === 'neal.fun' && window.location.pathname === '/infinite-craft/') {
 			if (document.readyState === 'interactive') {
@@ -17,7 +17,7 @@ function domPromise(func: () => any): Promise<any> {
 		}
 	});
 }
-function loadPromise(func: () => any): Promise<any> {
+function loadPromise<T>(func: () => T): Promise<T> {
 	return new Promise((resolve) => {
 		if (window.location.hostname === 'neal.fun' && window.location.pathname === '/infinite-craft/') {
 			if (document.readyState === 'complete') {

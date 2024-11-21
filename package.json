@@ -45,6 +45,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.25.9",
+		"@types/howler": "^2.2.12",
 		"infinite-craft-framework": "file:"
 	},
 	"lint-staged": {

@@ -1,4 +1,4 @@
-import type { CraftResponse, Element, Instance, Position } from './types';
+import type { CraftResponse, Element, Instance, Position, VirtualDOM } from './types';
 import { dom } from './dom';
 
 export const state: Promise<{
@@ -36,91 +36,91 @@ export const state: Promise<{
 		dom.container.then((container) =>
 			resolve({
 				get nextTick() {
-					return (container as any).__vue__.$nextTick;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.$nextTick;
 				},
 				get calcInstanceSize() {
-					return (container as any).__vue__.calcInstanceSize;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.calcInstanceSize;
 				},
 				get changeSort() {
-					return (container as any).__vue__.changeSort;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.changeSort;
 				},
 				get checkControlsBlur() {
-					return (container as any).__vue__.checkControlsBlur;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.checkControlsBlur;
 				},
 				get checkIfMobile() {
-					return (container as any).__vue__.checkIfMobile;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.checkIfMobile;
 				},
 				get checkIntersections() {
-					return (container as any).__vue__.checkIntersections;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.checkIntersections;
 				},
 				get clearInstances() {
-					return (container as any).__vue__.clearInstances;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.clearInstances;
 				},
 				get craft() {
-					return (container as any).__vue__.craft;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.craft;
 				},
 				get dropElement() {
-					return (container as any).__vue__.dropElement;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.dropElement;
 				},
 				get duplicateInstance() {
-					return (container as any).__vue__.duplicateInstance;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.duplicateInstance;
 				},
 				get getCenterOfCraft() {
-					return (container as any).__vue__.getCenterOfCraft;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.getCenterOfCraft;
 				},
 				get getCraftResponse() {
-					return (container as any).__vue__.getCraftResponse;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.getCraftResponse;
 				},
 				get getEventCoords() {
-					return (container as any).__vue__.getEventCoords;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.getEventCoords;
 				},
 				get goToAppStore() {
-					return (container as any).__vue__.goToAppStore;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.goToAppStore;
 				},
 				get hideElement() {
-					return (container as any).__vue__.hideElement;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.hideElement;
 				},
 				get mobileSelectElement() {
-					return (container as any).__vue__.mobileSelectElement;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.mobileSelectElement;
 				},
 				get moveInstance() {
-					return (container as any).__vue__.moveInstance;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.moveInstance;
 				},
 				get onResize() {
-					return (container as any).__vue__.onResize;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.onResize;
 				},
 				get playInstanceSound() {
-					return (container as any).__vue__.playInstanceSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.playInstanceSound;
 				},
 				get removeCurrentHover() {
-					return (container as any).__vue__.removeCurrentHover;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.removeCurrentHover;
 				},
 				get reset() {
-					return (container as any).__vue__.reset;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.reset;
 				},
 				get saveItems() {
-					return (container as any).__vue__.saveItems;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.saveItems;
 				},
 				get selectElement() {
-					return (container as any).__vue__.selectElement;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.selectElement;
 				},
 				get selectInstance() {
-					return (container as any).__vue__.selectInstance;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.selectInstance;
 				},
 				get setInstancePosition() {
-					return (container as any).__vue__.setInstancePosition;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.setInstancePosition;
 				},
 				get setInstanceZIndex() {
-					return (container as any).__vue__.setInstanceZIndex;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.setInstanceZIndex;
 				},
 				get setPinwheelCoords() {
-					return (container as any).__vue__.setPinwheelCoords;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.setPinwheelCoords;
 				},
 				get toggleDarkMode() {
-					return (container as any).__vue__.toggleDarkMode;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.toggleDarkMode;
 				},
 				get toggleSound() {
-					return (container as any).__vue__.toggleSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.toggleSound;
 				},
 			}),
 		);
@@ -143,16 +143,16 @@ export const state: Promise<{
 });
 
 export const data: Promise<{
-	deleteSound: any;
+	deleteSound: Howl;
 	discoveries: string[];
-	discoverySound: any;
+	discoverySound: Howl;
 	elements: Element[];
-	errorSound: any;
+	errorSound: Howl;
 	filteredElements: Element[];
 	hasCrafted: boolean;
 	hoverId: number;
 	instanceId: number;
-	instanceSound: any;
+	instanceSound: Howl;
 	instanceSoundRate: number;
 	instances: Instance[];
 	isActive: boolean;
@@ -164,11 +164,10 @@ export const data: Promise<{
 	isMuted: boolean;
 	mobileIsCrafting: boolean;
 	mouseDown: boolean;
-	moveListener: any;
-	rewardSound: any;
+	rewardSound: Howl;
 	searchQuery: string;
 	searchResults: Element[];
-	selectedInstance: Instance | any;
+	selectedInstance: Instance | null;
 	showControlFade: boolean;
 	showDiscoveredOnly: boolean;
 	sidebarSize: number;
@@ -180,100 +179,97 @@ export const data: Promise<{
 		dom.container.then((container) =>
 			resolve({
 				get deleteSound() {
-					return (container as any).__vue__._data.deleteSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.deleteSound;
 				},
 				get discoveries() {
-					return (container as any).__vue__._data.discoveries;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.discoveries;
 				},
 				get discoverySound() {
-					return (container as any).__vue__._data.discoverySound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.discoverySound;
 				},
 				get elements() {
-					return (container as any).__vue__._data.elements;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.elements;
 				},
 				get errorSound() {
-					return (container as any).__vue__._data.errorSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.errorSound;
 				},
 				get filteredElements() {
-					return (container as any).__vue__.filteredElements;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.filteredElements;
 				},
 				get hasCrafted() {
-					return (container as any).__vue__._data.hasCrafted;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.hasCrafted;
 				},
 				get hoverId() {
-					return (container as any).__vue__._data.hoverId;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.hoverId;
 				},
 				get instanceId() {
-					return (container as any).__vue__._data.instanceId;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.instanceId;
 				},
 				get instanceSound() {
-					return (container as any).__vue__._data.instanceSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.instanceSound;
 				},
 				get instanceSoundRate() {
-					return (container as any).__vue__._data.instanceSoundRate;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.instanceSoundRate;
 				},
 				get instances() {
-					return (container as any).__vue__._data.instances;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.instances;
 				},
 				get isActive() {
-					return (container as any).__vue__._data.isActive;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isActive;
 				},
 				get isAndroid() {
-					return (container as any).__vue__._data.isAndroid;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isAndroid;
 				},
 				get isDarkMode() {
-					return (container as any).__vue__._data.isDarkMode;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isDarkMode;
 				},
 				get isDeleting() {
-					return (container as any).__vue__._data.isDeleting;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isDeleting;
 				},
 				get isIOS() {
-					return (container as any).__vue__._data.isIOS;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isIOS;
 				},
 				get isMobile() {
-					return (container as any).__vue__._data.isMobile;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isMobile;
 				},
 				get isMuted() {
-					return (container as any).__vue__._data.isMuted;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.isMuted;
 				},
 				get mobileIsCrafting() {
-					return (container as any).__vue__._data.mobileIsCrafting;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.mobileIsCrafting;
 				},
 				get mouseDown() {
-					return (container as any).__vue__._data.mouseDown;
-				},
-				get moveListener() {
-					return (container as any).__vue__._data.moveListener;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.mouseDown;
 				},
 				get rewardSound() {
-					return (container as any).__vue__._data.rewardSound;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.rewardSound;
 				},
 				get searchQuery() {
-					return (container as any).__vue__._data.searchQuery;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.searchQuery;
 				},
 				get searchResults() {
-					return (container as any).__vue__.searchResults;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.searchResults;
 				},
 				get selectedInstance() {
-					return (container as any).__vue__._data.selectedInstance;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.selectedInstance;
 				},
 				get showControlFade() {
-					return (container as any).__vue__._data.showControlFade;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.showControlFade;
 				},
 				get showDiscoveredOnly() {
-					return (container as any).__vue__._data.showDiscoveredOnly;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.showDiscoveredOnly;
 				},
 				get sidebarSize() {
-					return (container as any).__vue__._data.sidebarSize;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.sidebarSize;
 				},
 				get sortBy() {
-					return (container as any).__vue__._data.sortBy;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.sortBy;
 				},
 				get sortedElements() {
-					return (container as any).__vue__.sortedElements;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__.sortedElements;
 				},
 				get sorts() {
-					return (container as any).__vue__._data.sorts;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._data.sorts;
 				},
 			}),
 		);
@@ -321,19 +317,19 @@ export const watchers: Promise<{
 		dom.container.then((container) =>
 			resolve({
 				get filteredElements() {
-					return (container as any).__vue__._computedWatchers.filteredElements;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._computedWatchers.filteredElements;
 				},
 				get mobileItemRows() {
-					return (container as any).__vue__._computedWatchers.mobileItemRows;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._computedWatchers.mobileItemRows;
 				},
 				get searchResults() {
-					return (container as any).__vue__._computedWatchers.searchResults;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._computedWatchers.searchResults;
 				},
 				get showPinwheel() {
-					return (container as any).__vue__._computedWatchers.showPinwheel;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._computedWatchers.showPinwheel;
 				},
 				get sortedElements() {
-					return (container as any).__vue__._computedWatchers.sortedElements;
+					return (container as VirtualDOM<HTMLDivElement>).__vue__._computedWatchers.sortedElements;
 				},
 			}),
 		);

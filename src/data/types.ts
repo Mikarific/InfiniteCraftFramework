@@ -42,8 +42,10 @@ export type EventType =
 export type EventListener = {
 	at: 'HEAD' | 'TAIL';
 	cancel: boolean;
-	callback: (...args: any[]) => any;
+	callback: (...args: unknown[]) => unknown;
 	once: boolean;
 	priority: number;
 	uuid: string;
 };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type VirtualDOM<T> = T & { __vue__: any };

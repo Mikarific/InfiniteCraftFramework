@@ -1,8 +1,8 @@
 import { dom } from '../data/dom';
 import { events, flags } from '../data/internal';
-import type { EventType } from '../data/types';
+import type { EventType, VirtualDOM } from '../data/types';
 
-function handleEvent(type: EventType, args: any[], body: (args?: any[]) => void) {
+function handleEvent(type: EventType, args: unknown[], body: (args?: unknown[]) => void) {
 	const listeners = events.get(type);
 	if (listeners.length === 0) return body(args);
 
@@ -33,7 +33,7 @@ function handleEvent(type: EventType, args: any[], body: (args?: any[]) => void)
 	}
 }
 
-async function handleEventReturnable(type: EventType, args: any[], body: (args?: any[]) => any) {
+async function handleEventReturnable(type: EventType, args: unknown[], body: (args?: unknown[]) => unknown) {
 	const listeners = events.get(type);
 	if (listeners.length === 0) return await body(args);
 
@@ -71,7 +71,7 @@ async function handleEventReturnable(type: EventType, args: any[], body: (args?:
 }
 
 async function registerEvents() {
-	const state = ((await dom.container) as any).__vue__;
+	const state = ((await dom.container) as VirtualDOM<HTMLDivElement>).__vue__;
 	const data = state._data;
 
 	// Craft Instances Event
