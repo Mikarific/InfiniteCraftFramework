@@ -9,8 +9,8 @@
 		"build:types": "tsc",
 		"build:js": "rollup -c",
 		"build": "run-s ci clean build:js",
-		"format": "prettier --ignore-path .eslintignore --write .",
-		"lint": "prettier --ignore-path .eslintignore --check --write . && eslint src/*.ts",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint src/*.ts",
 		"prepublishOnly": "run-s build",
 		"ci": "run-s lint",
 		"clean": "del-cli dist"
