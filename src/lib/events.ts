@@ -123,9 +123,7 @@ async function registerEvents() {
 	state.dropElement = new Proxy(state.dropElement, {
 		apply: (target, thisArg, argsList) => {
 			if (data.mouseDown && data.selectedInstance) {
-				handleEvent('InstanceDroppedEvent', [...argsList, data.selectedInstance], (args) =>
-					Reflect.apply(target, thisArg, args.slice(0, -1)),
-				);
+				handleEvent('InstanceDroppedEvent', argsList, (args) => Reflect.apply(target, thisArg, args));
 			} else {
 				Reflect.apply(target, thisArg, argsList);
 			}
@@ -133,6 +131,22 @@ async function registerEvents() {
 	});
 	(await dom.container).addEventListener('mouseup', state.dropElement);
 	(await dom.container).addEventListener('touchend', state.dropElement);
+
+	// Dark Mode Toggled Event
+	events.set('DarkModeToggledEvent', []);
+	state.toggleDarkMode = new Proxy(state.toggleDarkMode, {
+		apply: (target, thisArg, argsList) => {
+			handleEvent('DarkModeToggledEvent', argsList, (args) => Reflect.apply(target, thisArg, args));
+		},
+	});
+
+	// Sound Toggled Event
+	events.set('SoundToggledEvent', []);
+	state.toggleSound = new Proxy(state.toggleSound, {
+		apply: (target, thisArg, argsList) => {
+			handleEvent('SoundToggledEvent', argsList, (args) => Reflect.apply(target, thisArg, args));
+		},
+	});
 
 	// Instance Created Event & Instance Elem Assigned Event
 	events.set('InstanceCreatedEvent', []);

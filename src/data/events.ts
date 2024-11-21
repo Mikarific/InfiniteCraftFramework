@@ -169,14 +169,8 @@ export function onInstanceSelected<T extends OptionsCancelable>(callback: Instan
 }
 
 type InstanceDroppedCallback<T extends OptionsCancelable> =
-	T['at'] extends 'HEAD' ?
-		(
-			event: MouseEvent | TouchEvent,
-			instance: Instance,
-			setEvent: (event: MouseEvent | TouchEvent) => void,
-			setInstance: (instance: Instance) => void,
-		) => void
-	:	(event: MouseEvent | TouchEvent, instance: Instance) => void;
+	T['at'] extends 'HEAD' ? (event: MouseEvent | TouchEvent, setEvent: (event: MouseEvent | TouchEvent) => void) => void
+	:	(event: MouseEvent | TouchEvent) => void;
 export function onInstanceDropped<T extends OptionsCancelable>(callback: InstanceDroppedCallback<T>, options?: T) {
 	const listeners = events.get('InstanceDroppedEvent');
 	const uuid = crypto.randomUUID();
@@ -191,6 +185,46 @@ export function onInstanceDropped<T extends OptionsCancelable>(callback: Instanc
 	return () => {
 		events.set(
 			'InstanceDroppedEvent',
+			listeners.filter((l) => l.uuid !== uuid),
+		);
+	};
+}
+
+type DarkModeToggledCallback = () => void;
+export function onDarkModeToggled(callback: DarkModeToggledCallback, options?: OptionsCancelable) {
+	const listeners = events.get('DarkModeToggledEvent');
+	const uuid = crypto.randomUUID();
+	insertEvent(listeners, {
+		at: options?.at ?? 'TAIL',
+		cancel: options?.cancel ?? false,
+		callback,
+		once: options?.once ?? false,
+		priority: options?.priority ?? 1000,
+		uuid,
+	});
+	return () => {
+		events.set(
+			'DarkModeToggledEvent',
+			listeners.filter((l) => l.uuid !== uuid),
+		);
+	};
+}
+
+type SoundToggledCallback = () => void;
+export function onSoundToggled(callback: SoundToggledCallback, options?: OptionsCancelable) {
+	const listeners = events.get('SoundToggledEvent');
+	const uuid = crypto.randomUUID();
+	insertEvent(listeners, {
+		at: options?.at ?? 'TAIL',
+		cancel: options?.cancel ?? false,
+		callback,
+		once: options?.once ?? false,
+		priority: options?.priority ?? 1000,
+		uuid,
+	});
+	return () => {
+		events.set(
+			'SoundToggledEvent',
 			listeners.filter((l) => l.uuid !== uuid),
 		);
 	};

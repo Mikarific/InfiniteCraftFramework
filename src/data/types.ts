@@ -33,12 +33,14 @@ export type OptionsReturnable = { at?: 'HEAD' | 'TAIL'; cancelWithReturn?: boole
 export type EventType =
 	| 'CraftEvent'
 	| 'CraftInstancesEvent'
+	| 'DarkModeToggledEvent'
 	| 'DuplicateEvent'
 	| 'ElementSelectedEvent'
 	| 'InstanceCreatedEvent'
 	| 'InstanceDroppedEvent'
 	| 'InstanceElemAssignedEvent'
-	| 'InstanceSelectedEvent';
+	| 'InstanceSelectedEvent'
+	| 'SoundToggledEvent';
 export type EventListener = {
 	at: 'HEAD' | 'TAIL';
 	cancel: boolean;
