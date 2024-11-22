@@ -1,32 +1,13 @@
-function domPromise<T>(func: () => T): Promise<T> {
+function domPromise<T>(elem: T): Promise<T> {
 	return new Promise((resolve) => {
 		if (window.location.hostname === 'neal.fun' && window.location.pathname === '/infinite-craft/') {
 			if (document.readyState === 'interactive') {
-				resolve(func());
+				resolve(elem);
 			} else {
 				window.addEventListener(
 					'DOMContentLoaded',
 					() => {
-						resolve(func());
-					},
-					{ once: true },
-				);
-			}
-		} else {
-			resolve(null);
-		}
-	});
-}
-function loadPromise<T>(func: () => T): Promise<T> {
-	return new Promise((resolve) => {
-		if (window.location.hostname === 'neal.fun' && window.location.pathname === '/infinite-craft/') {
-			if (document.readyState === 'complete') {
-				resolve(func());
-			} else {
-				window.addEventListener(
-					'load',
-					() => {
-						resolve(func());
+						resolve(elem);
 					},
 					{ once: true },
 				);
@@ -37,58 +18,74 @@ function loadPromise<T>(func: () => T): Promise<T> {
 	});
 }
 
-const favicon: Promise<HTMLLinkElement> = domPromise(() => document.querySelector('link[rel="icon"]'));
-const head: Promise<HTMLHeadElement> = domPromise(() => document.getElementsByTagName('head')[0]);
-const body: Promise<HTMLBodyElement> = domPromise(() => document.querySelector('.infinite-craft-body'));
-const container: Promise<HTMLDivElement> = domPromise(() => document.querySelector('.container'));
-const nealFun: Promise<HTMLImageElement> = domPromise(() =>
+function loadPromise<T>(elem: T): Promise<T> {
+	return new Promise((resolve) => {
+		if (window.location.hostname === 'neal.fun' && window.location.pathname === '/infinite-craft/') {
+			if (document.readyState === 'complete') {
+				resolve(elem);
+			} else {
+				window.addEventListener(
+					'load',
+					() => {
+						resolve(elem);
+					},
+					{ once: true },
+				);
+			}
+		} else {
+			resolve(null);
+		}
+	});
+}
+
+const favicon: Promise<HTMLLinkElement> = domPromise(document.querySelector('link[rel="icon"]'));
+const head: Promise<HTMLHeadElement> = domPromise(document.getElementsByTagName('head')[0]);
+const body: Promise<HTMLBodyElement> = domPromise(document.querySelector('.infinite-craft-body'));
+const container: Promise<HTMLDivElement> = domPromise(document.querySelector('.container'));
+const nealFun: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > a > .site-title, .site-title'),
 );
-const sideControls: Promise<HTMLDivElement> = domPromise(() =>
+const sideControls: Promise<HTMLDivElement> = domPromise(
 	document.querySelector('.container > .side-controls, .side-controls'),
 );
-const sideControlsTrash: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsTrash: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls > .trash, .trash'),
 );
-const sideControlsDarkMode: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsDarkMode: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls > .dark-mode-icon, .dark-mode-icon'),
 );
-const sideControlsClear: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsClear: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls > .clear, .clear'),
 );
-const sideControlsSound: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsSound: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls > .sound, .sound'),
 );
-const sideControlsMobile: Promise<HTMLDivElement> = domPromise(() =>
+const sideControlsMobile: Promise<HTMLDivElement> = domPromise(
 	document.querySelector('.container > .side-controls-mobile, .side-controls-mobile'),
 );
-const sideControlsMobileDarkMode: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsMobileDarkMode: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls-mobile > .dark-mode-mobile, .dark-mode-mobile'),
 );
-const sideControlsMobileSound: Promise<HTMLImageElement> = domPromise(() =>
+const sideControlsMobileSound: Promise<HTMLImageElement> = domPromise(
 	document.querySelector('.container > .side-controls-mobile > .sound-mobile, .sound-mobile'),
 );
-const particles: Promise<HTMLCanvasElement> = domPromise(() =>
-	document.querySelector('.container > .particles, .particles'),
-);
-const sidebar: Promise<HTMLDivElement> = domPromise(() => document.querySelector('.container > .sidebar, .sidebar'));
-const sidebarInner: Promise<HTMLDivElement> = domPromise(() =>
+const particles: Promise<HTMLCanvasElement> = domPromise(document.querySelector('.container > .particles, .particles'));
+const sidebar: Promise<HTMLDivElement> = domPromise(document.querySelector('.container > .sidebar, .sidebar'));
+const sidebarInner: Promise<HTMLDivElement> = domPromise(
 	document.querySelector('.container > .sidebar > .sidebar-inner, .sidebar-inner'),
 );
-const items: Promise<HTMLDivElement> = domPromise(() =>
+const items: Promise<HTMLDivElement> = domPromise(
 	document.querySelector('.container > .sidebar > .sidebar-inner > .items, .items'),
 );
-const itemsInner: Promise<HTMLDivElement> = loadPromise(() =>
+const itemsInner: Promise<HTMLDivElement> = loadPromise(
 	document.querySelector('.container > .sidebar > .sidebar-inner > .items > .items-inner, .items-inner'),
 );
-const instances: Promise<HTMLDivElement> = domPromise(() =>
-	document.querySelector('.container > .instances, .instances'),
-);
-const instancesInner: Promise<HTMLDivElement> = domPromise(() =>
+const instances: Promise<HTMLDivElement> = domPromise(document.querySelector('.container > .instances, .instances'));
+const instancesInner: Promise<HTMLDivElement> = domPromise(
 	document.querySelector('.container > .instances > div, .instances > div'),
 );
-const logo: Promise<HTMLImageElement> = domPromise(() => document.querySelector('.container > .logo, .logo'));
-const reset: Promise<HTMLDivElement> = domPromise(() => document.querySelector('.container > .reset, .reset'));
+const logo: Promise<HTMLImageElement> = domPromise(document.querySelector('.container > .logo, .logo'));
+const reset: Promise<HTMLDivElement> = domPromise(document.querySelector('.container > .reset, .reset'));
 
 export const dom = {
 	favicon,
